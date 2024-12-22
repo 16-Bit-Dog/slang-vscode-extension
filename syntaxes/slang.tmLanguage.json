@@ -1287,10 +1287,17 @@
 			"name": "punctuation.section.arguments.begin.bracket.round.function.member.slang"
 		  }
 		},
-		"end": "(\\))",
+		"end": "(\\))((?=\\[)(.*))?",
 		"endCaptures": {
 		  "1": {
 			"name": "punctuation.section.arguments.end.bracket.round.function.member.slang"
+		  },
+		  "3": {
+			"patterns": [
+				{
+					"include": "#subscript-accessor-body"
+				}
+			]
 		  }
 		},
 		"patterns": [
