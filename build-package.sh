@@ -7,6 +7,7 @@ target_build() {
   TARGET="$2"
   TEMP_LIBRARY="$3"
   TEMP_EXECUTABLE="$4"
+  TEMP_LIBRARY_2="$5"
 
   echo "extracting $ZIP"
   unzip -n "$ZIP" -d "$TEMP_DIR"
@@ -14,6 +15,7 @@ target_build() {
   echo "installing binaries for $TARGET"
   mkdir -p "./server/bin/$TARGET"
   cp "$TEMP_DIR/$TEMP_LIBRARY" ./server/bin/"$TARGET"/
+  cp "$TEMP_DIR/$TEMP_LIBRARY_2" ./server/bin/"$TARGET"/
   cp "$TEMP_DIR/$TEMP_EXECUTABLE" ./server/bin/"$TARGET"/
   chmod +x ./server/bin/"$TARGET"/*
 
@@ -25,9 +27,9 @@ target_build() {
   rm -rf ./server/bin/
 }
 
-target_build "$WIN32_X64_ZIP" win32-x64 bin/slang.dll bin/slangd.exe
-target_build "$WIN32_ARM64_ZIP" win32-arm64 bin/slang.dll bin/slangd.exe
-target_build "$LINUX_X64_ZIP" linux-x64 lib/libslang.so bin/slangd
-target_build "$LINUX_ARM64_ZIP" linux-arm64 lib/libslang.so bin/slangd
-target_build "$DARWIN_X64_ZIP" darwin-x64 lib/libslang.dylib bin/slangd
-target_build "$DARWIN_ARM64_ZIP" darwin-arm64 lib/libslang.dylib bin/slangd
+target_build "$WIN32_X64_ZIP" win32-x64 bin/slang.dll bin/slang-glsl-module.dll bin/slangd.exe
+target_build "$WIN32_ARM64_ZIP" win32-arm64 bin/slang.dll bin/slang-glsl-module.dll bin/slangd.exe
+target_build "$LINUX_X64_ZIP" linux-x64 lib/libslang.so lib/libslang-glsl-module.so bin/slangd
+target_build "$LINUX_ARM64_ZIP" linux-arm64 lib/libslang.so lib/libslang-glsl-module.so bin/slangd
+target_build "$DARWIN_X64_ZIP" darwin-x64 lib/libslang.dylib lib/libslang-glsl-module.dylib bin/slangd
+target_build "$DARWIN_ARM64_ZIP" darwin-arm64 lib/libslang.dylib lib/libslang-glsl-module.dylib bin/slangd
